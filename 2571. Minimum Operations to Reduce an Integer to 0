@@ -1,0 +1,24 @@
+class Solution:
+    def minOperations(self, n: int) -> int:
+        temp = n
+        seen = []
+        solution = 0
+
+
+        while temp != 0:
+            upper = 0
+            while 2**upper < temp:
+                upper += 1
+            lower = upper - 1
+
+            if (temp == 2**lower) or (temp == 2**upper):
+                solution += 1 
+                break
+            if (temp - 2**lower) <= (2**upper - temp):
+                temp = temp - 2**lower
+                solution += 1
+            if (2**upper - temp) < (temp - 2**lower):
+                temp = 2**upper - temp
+                solution += 1
+
+        return solution
